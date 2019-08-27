@@ -1,0 +1,74 @@
+
+<p *ngIf="isValidFormSubmitted" [ngClass]="'success'" class="alert alert-success">
+  Form submitted successfully.
+</p>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <label>Name
+      <input type="text" class="form-control" #name="ngModel" name="name" required [(ngModel)]="professional.name" />
+      
+      <div *ngIf="name.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'"> 
+        <div class="invalid-feedback d-block" *ngIf="name || name"> 
+          Name is Required.
+        </div>	
+      </div>
+    
+    </label><br>
+    <label>Phone
+      <input type="text" class="form-control" #phone="ngModel" name="phone" required [(ngModel)]="professional.phone" />
+    
+      <div *ngIf="phone.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'"> 
+          
+        <div class="invalid-feedback d-block" *ngIf="phone.errors.phone || phone"> 
+          Phone not valid.
+        </div>	
+      </div> 
+    </label><br>
+    <label>Birthday<br>
+      <mat-form-field>
+        <input matInput [matDatepicker]="birthday" placeholder="Choose a date" [(ngModel)]="professional.birthday" name="birthday" required>
+        <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+        <mat-datepicker #birthday></mat-datepicker>
+      </mat-form-field>
+      <div *ngIf="birthday.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'"> 
+        <div class="invalid-feedback d-block" *ngIf="birthday.errors.birthday || birthday"> 
+          Birthday not valid.
+        </div>	
+      </div>    
+    </label>
+    <br>
+
+    <label>E-mail
+      <input name="email" class="form-control" email #email="ngModel" required [(ngModel)]="professional.email" />
+        <div *ngIf="email.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'"> 
+          
+          <div class="invalid-feedback d-block" *ngIf="email.errors.email || email"> 
+            Email not valid.
+          </div>	
+        </div>    
+    </label><br>
+    <label>City
+      <input type="text" class="form-control" #city="ngModel" name="city" required [(ngModel)]="professional.city"  />
+      <div *ngIf="city.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'"> 
+        <div class="invalid-feedback d-block" *ngIf="city"> 
+          City is required.
+        </div>	
+      </div> 
+    </label><br>
+   
+    
+    
+    <label>State
+      <select name="state" #state="ngModel" [(ngModel)]="professional.state" required>
+        <option *ngFor="let state of states | async" [ngValue]="state">{{state}}</option>
+      </select>  
+      <div *ngIf="state.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'"> 
+        <div class="invalid-feedback d-block" *ngIf="state"> 
+          State is required.
+        </div>	
+      </div> 
+    </label><br><br>
+    <label>Description
+      <textarea class="form-control" id="description" name="description" [(ngModel)]="professional.description"></textarea>
+    </label>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>

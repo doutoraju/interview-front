@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>Professionals</h1>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered" mdbTable>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Birthday</th>
+                    <th>E-mail</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let professional of professionals | async">
+                    <td>{{professional.name}}</td>
+                    <td>{{professional.phone}}</td>
+                    <td>{{professional.birthday}}</td>
+                    <td>{{professional.email}}</td>
+                    <td>{{professional.city}}</td>
+                    <td>{{professional.state}}</td>
+                    <td>{{professional.description}}</td>
+                    <td><button (click)="deleteProfessional(professional.idProfessional)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
