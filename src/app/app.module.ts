@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import {MatNativeDateModule, MatDatepickerModule, NativeDateModule, 
-  MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule} from '@angular/material';
+  MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule, MatSortModule, MatTableModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,7 +34,12 @@ import { ListStatesComponent } from './list-states/list-states.component';
     MatInputModule,
     MatRippleModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSortModule,
+    MatTableModule
+  ],
+  exports: [
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

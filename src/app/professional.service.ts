@@ -8,15 +8,8 @@ import { Observable, Subject } from 'rxjs';
 export class ProfessionalService {
 
   private baseUrl = '/api/professionals/';
-  private columnSortedSource = new Subject<ColumnSortedEvent>();
-
+  
   constructor(private http: HttpClient) { }
-
-  columnSorted$ = this.columnSortedSource.asObservable();
-
-  columnSorted(event: ColumnSortedEvent) {
-    this.columnSortedSource.next(event);
-  }
 
   createProfessional(professional: Object ): Observable<Object> {
     return this.http.post(`${this.baseUrl}`, professional);
@@ -32,7 +25,3 @@ export class ProfessionalService {
 
 }
 
-export interface ColumnSortedEvent {
-  sortColumn: string;
-  sortDirection: string;
-}
