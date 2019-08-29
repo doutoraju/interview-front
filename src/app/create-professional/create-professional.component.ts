@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ProfessionalService } from '../professional.service';
 import { StateService } from '../state.service';
 
 import { Professional} from '../professional';
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -17,40 +18,96 @@ export class CreateProfessionalComponent implements OnInit {
 
   professional: Professional = new Professional();
   states: Observable<Object>;
-  isValidFormSubmitted = false;
 
-  submitted = false;
+  createForm: FormGroup;
 
-  constructor(private professionalService: ProfessionalService, private stateService: StateService) { }
+  constructor(private professionalService: ProfessionalService, private stateService: StateService,
+              private fb: FormBuilder, private toastr: ToastrService) {
+
+
+      // this.professional = this.createForm.value;
+
+  }
 
   ngOnInit() {
-    this.reloadData();
+    this.loadStateList();
+    this.getForm();
   }
 
-  newProfessional(): void {
-    this.submitted = false;
-    this.professional = new Professional();
+  showSuccess(msg: string) {
+    this.toastr.success(msg, '', { positionClass: 'toast-top-center'});
   }
 
-  save() {
-    this.professionalService.createProfessional(this.professional)
-    .subscribe(data => console.log(data), error => console.log(error));
-    this.professional = new Professional();
+  showFailure(msg: string) {
+    this.toastr.error(msg, '', { positionClass: 'toast-top-center'});
   }
 
-  onSubmit(form: NgForm) {
-    this.isValidFormSubmitted = false;
-    if (form.invalid) {
+  save(pro: FormGroup) {
+    this.professionalService.createProfessional(pro.value)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.professional = new Professional();
+        this.showSuccess('Professional saved!');
+      },
+      error => {
+        console.log(error);
+        this.showFailure('Error saving professional.');
+      }
+    );
+    pro.reset();
+  }
+
+  onSubmit() {
+    if (this.createForm.invalid) {
       return;
     }
-    this.isValidFormSubmitted = true;
-    this.submitted = true;
-    this.save();
-    form.resetForm();
+    this.save(this.createForm);
   }
 
-  reloadData() {
+  loadStateList() {
     this.states = this.stateService.getStateList();
   }
+
+  getForm() {
+    this.createForm = this.fb.group({
+      name: ['', Validators.required],
+      phone: ['', Validators.required],
+      birthday: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      description: ['']
+    });
+  }
+
+  get name() {
+    return this.createForm.get('name');
+  }
+
+  get phone() {
+    return this.createForm.get('phone');
+  }
+
+  get birthday() {
+    return this.createForm.get('birthday');
+  }
+
+  get email() {
+    return this.createForm.get('email');
+  }
+
+  get city() {
+    return this.createForm.get('city');
+  }
+
+  get state() {
+    return this.createForm.get('state');
+  }
+
+  get description() {
+    return this.createForm.get('description');
+  }
+
 
 }

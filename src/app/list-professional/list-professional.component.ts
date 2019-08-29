@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Professional } from '../professional';
 import { ProfessionalService } from '../professional.service';
 import { MatTableDataSource, MatSort } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-professional',
@@ -18,7 +19,7 @@ export class ListProfessionalComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private professionalService: ProfessionalService) { }
+  constructor(private professionalService: ProfessionalService, private toastr: ToastrService) { }
 
   ngOnInit() {
 
@@ -44,13 +45,24 @@ export class ListProfessionalComponent implements OnInit, AfterViewInit {
       .subscribe(
         data => {
           console.log(data);
+          this.toastr.success('Professional deleted successfully!', '', { positionClass: 'toast-top-center'});
+          this.reloadData();
         },
-        error => console.log(error)
+        error => {
+          console.log(error);
+
+          this.toastr.success('An error occured while trying to delete professional.', '', { positionClass: 'toast-top-center'});
+        }
       );
-    this.reloadData();
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 }
