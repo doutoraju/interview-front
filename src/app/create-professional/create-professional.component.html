@@ -1,0 +1,46 @@
+
+<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+  
+    <!-- <input type="text" class="form-control" #name="ngModel" name="name" required [(ngModel)]="professional.name" /> -->
+  <mat-form-field>
+    <input matInput formControlName="name" placeholder="Name" required>
+    <mat-error *ngIf="name.invalid">You must enter a value </mat-error>
+  </mat-form-field><br />
+
+  <mat-form-field>
+    <input matInput formControlName="phone" placeholder="Phone" required>
+    <mat-error *ngIf="phone.invalid">You must enter a value </mat-error>
+  </mat-form-field><br>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="birthday" placeholder="Birthday" formControlName="birthday" required>
+    <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+    <mat-datepicker #birthday></mat-datepicker>
+    <mat-error *ngIf="birthday.invalid">Invalid Date</mat-error>
+  </mat-form-field><br>
+
+  <mat-form-field>
+    <input matInput formControlName="email" placeholder="E-mail" required>
+    <mat-error *ngIf="email.hasError('email')">Invalid E-mail</mat-error>
+    <mat-error *ngIf="email.hasError('required')">You must enter a value</mat-error>
+  </mat-form-field><br />
+
+  <mat-form-field>
+    <input matInput formControlName="city" placeholder="City" required>
+    <mat-error *ngIf="city.invalid">You must enter a value </mat-error>
+  </mat-form-field><br />
+
+  <mat-form-field>
+    <mat-select formControlName="state" placeholder="State">  
+      <mat-option *ngFor="let state of states | async" value="{{state}}">{{state}}</mat-option>  
+    </mat-select>  
+    <mat-error *ngIf="state.invalid">You must enter a value </mat-error>
+  </mat-form-field><br />
+
+  <mat-form-field>
+    <textarea matInput formControlName="description" placeholder="Description" matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="10"></textarea>
+  </mat-form-field><br />
+
+  
+  <button mat-raised-button type="submit" class="btn btn-success">Submit</button>
+</form>
