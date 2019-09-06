@@ -67,6 +67,7 @@ export class CreateProfessionalComponent implements OnInit {
 
   loadStateList() {
     this.states = this.stateService.getStateList();
+    this.states.forEach( state => console.log(state));
   }
 
   getForm() {
