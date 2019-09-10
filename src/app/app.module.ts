@@ -5,8 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import {MatNativeDateModule, MatDatepickerModule, NativeDateModule, 
-  MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule, MatSortModule, MatTableModule, MatSelectModule} from '@angular/material';
+import {
+  MatNativeDateModule, MatDatepickerModule, NativeDateModule, 
+  MatButtonModule,     MatFormFieldModule,  MatInputModule, 
+  MatRippleModule,     MatSortModule,       MatTableModule, 
+  MatSelectModule/*,     MatTabsModule,       MatSidenavModule*/} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +18,8 @@ import { ListProfessionalComponent } from './list-professional/list-professional
 import { ListStatesComponent } from './list-states/list-states.component';
 
 import { ToastrModule } from 'ngx-toastr';
-
+import { CreateSkillComponent } from './create-skill/create-skill.component';
+import { ListSkillComponent } from './list-skill/list-skill.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,8 @@ import { ToastrModule } from 'ngx-toastr';
     CreateProfessionalComponent,
     ListProfessionalComponent,
     ListStatesComponent,
+    CreateSkillComponent,
+    ListSkillComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,10 +47,14 @@ import { ToastrModule } from 'ngx-toastr';
     MatTableModule,
     ReactiveFormsModule,
     MatSelectModule,
+    //MatTabsModule, 
+    //MatSidenavModule,
     ToastrModule.forRoot()
   ],
   exports: [
-    MatSortModule
+    MatSortModule,
+    //MatTabsModule,
+    //MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

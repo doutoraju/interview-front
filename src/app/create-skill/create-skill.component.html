@@ -1,0 +1,11 @@
+<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput formControlName="name" placeholder="Name" required>
+    <mat-error *ngIf="name.invalid">You must enter a value </mat-error>
+  </mat-form-field><br />
+  <mat-form-field>
+    <input matInput formControlName="description" placeholder="Description" required>
+    <mat-error *ngIf="description.invalid">You must enter a value </mat-error>
+  </mat-form-field><br>
+  <button mat-raised-button type="submit" class="btn btn-success">Submit</button>
+</form>
