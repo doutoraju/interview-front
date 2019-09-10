@@ -9,7 +9,7 @@ import {
   MatNativeDateModule, MatDatepickerModule, NativeDateModule, 
   MatButtonModule,     MatFormFieldModule,  MatInputModule, 
   MatRippleModule,     MatSortModule,       MatTableModule, 
-  MatSelectModule/*,     MatTabsModule,       MatSidenavModule*/} from '@angular/material';
+  MatSelectModule,     } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { CreateSkillComponent } from './create-skill/create-skill.component';
 import { ListSkillComponent } from './list-skill/list-skill.component';
 
+
+import { FlexLayoutModule} from '@angular/flex-layout';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,8 @@ import { ListSkillComponent } from './list-skill/list-skill.component';
     ListProfessionalComponent,
     ListStatesComponent,
     CreateSkillComponent,
-    ListSkillComponent,
+    ListSkillComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -47,15 +52,11 @@ import { ListSkillComponent } from './list-skill/list-skill.component';
     MatTableModule,
     ReactiveFormsModule,
     MatSelectModule,
-    //MatTabsModule, 
-    //MatSidenavModule,
     ToastrModule.forRoot()
   ],
   exports: [
-    MatSortModule,
-    //MatTabsModule,
-    //MatSidenavModule
-  ],
+    MatSortModule
+ ],
   providers: [],
   bootstrap: [AppComponent]
 })
